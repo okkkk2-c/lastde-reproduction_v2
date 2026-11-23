@@ -1,0 +1,51 @@
+# Smallest real run: GPT-2 as both source and proxy, 6 pairs.
+# Downloads ~500 MB of model weights on first run.
+run_name: tiny_gpt2
+seed: 0
+cache_dir: cache
+n_boot: 200
+
+data:
+  - name: tiny
+    path: data/tiny_pairs.jsonl
+
+models:
+  - name: gpt2_white
+    source: gpt2
+    proxy: gpt2
+    white_box: true
+
+  # black-box example: GPT-2 text scored by GPT-2-medium
+  - name: gpt2_to_gpt2medium
+    source: gpt2
+    proxy: gpt2-medium
+    white_box: false
+
+methods:
+  - lastde
+  - lastde_pp
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+  - fast_detectgpt
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std
+
+lastde_pp:
+  s: 4
+  eps_factor: 8
+  tau_prime: 15
+  agg: std
+  n_samples: 10
+  max_new_tokens: 64
+  temperature: 1.0
+  top_p: 0.95
+
+fast_detectgpt:
+  n_samples: 10
+  max_new_tokens: 64

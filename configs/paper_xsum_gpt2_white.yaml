@@ -1,0 +1,46 @@
+# Paper-exact settings for the parts we can reproduce:
+#   data: XSum, 150 pairs, 30-token prefix, ~200-token continuation
+#   Lastde:  s=3, eps=10n, tau'=5
+#   Lastde++: s=4, eps=8n, tau'=15, 100 samples
+#   white-box: GPT-2 generates and scores
+# Not included: Fast-DetectGPT (paper uses 10,000 samples), DetectGPT/DNA-GPT,
+# Zhihu, closed-source models, 18-model sweep.
+run_name: paper_xsum_gpt2_white
+seed: 0
+cache_dir: cache
+n_boot: 1000
+
+data:
+  - name: xsum
+    path: data/pairs/xsum/gpt2.jsonl
+    limit: 150
+
+models:
+  - name: gpt2_white
+    source: gpt2
+    proxy: gpt2
+    white_box: true
+
+methods:
+  - lastde
+  - lastde_pp
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std
+
+lastde_pp:
+  s: 4
+  eps_factor: 8
+  tau_prime: 15
+  agg: std
+  n_samples: 100
+  max_new_tokens: 200
+  temperature: 1.0
+  top_p: 0.95

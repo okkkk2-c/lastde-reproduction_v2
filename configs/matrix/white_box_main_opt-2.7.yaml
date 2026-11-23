@@ -1,0 +1,30 @@
+run_name: white_box_main_opt-2.7
+seed: 0
+cache_dir: cache
+n_boot: 1000
+data:
+- name: xsum
+  path: data/pairs/xsum/facebook__opt-2.7b.jsonl
+  limit: 20
+- name: squad
+  path: data/pairs/squad/facebook__opt-2.7b.jsonl
+  limit: 20
+- name: writingprompts
+  path: data/pairs/writingprompts/facebook__opt-2.7b.jsonl
+  limit: 20
+models:
+- name: opt-2.7_white
+  source: facebook/opt-2.7b
+  proxy: facebook/opt-2.7b
+  white_box: true
+methods:
+- lastde
+- likelihood
+- logrank
+- entropy
+- detectlrr
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std

@@ -1,0 +1,24 @@
+run_name: black_box_gpt2_xsum_sameproxy
+seed: 0
+cache_dir: cache
+n_boot: 1000
+data:
+  - name: xsum
+    path: data/pairs/xsum/gpt2.jsonl
+    limit: 150
+models:
+  - name: gpt2_black
+    source: gpt2
+    proxy: gpt2
+    white_box: false
+methods:
+  - lastde
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std

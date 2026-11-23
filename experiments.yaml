@@ -1,0 +1,64 @@
+# Lastde full reproduction: experiment matrix.
+# Counts are model x dataset; each run uses 150 human/LLM pairs and AUROC.
+
+defaults:
+  pairs_per_dataset: 150
+  prompt_tokens: 30
+  max_new_tokens: 200
+  proxy: gpt-j
+  lastde:
+    s: 3
+    eps_factor: 10
+    tau_prime: 5
+    agg: std
+  lastde_pp:
+    s: 4
+    eps_factor: 8
+    tau_prime: 15
+    n_samples: 100
+
+phases:
+  A_infra:
+    goal: clean repo, model registry, loaders, config generation, cache, resume
+  B_white_box_main:
+    datasets: [xsum, squad, writingprompts]
+    models: main_open
+    proxy: source
+    methods: [lastde, likelihood, logrank, entropy, detectlrr]
+    count: 12 models x 3 datasets
+  C_black_box_main:
+    datasets: [xsum, writingprompts, reddit]
+    models: main_open_without_gpt_j_plus_gpt4_turbo
+    proxy: gpt-j
+    methods: [lastde, likelihood, logrank, entropy, detectlrr]
+    count: 12 source models x 3 datasets
+  D_sampling_and_heavy_baselines:
+    datasets: [xsum, writingprompts]
+    models: [gpt2, opt-2.7, gpt-j]
+    methods: [lastde_pp, fast_detectgpt, detectgpt, detectnpr, dna_gpt]
+    note: Fast-DetectGPT analytical solution for same-model proxy; subset only for 10k sampling
+  E_cross_lingual:
+    datasets: [wmt16_de, wmt16_en, zhihu]
+    models: [mgpt, qwen1.5-7b, yi-1.5-6b]
+    methods: [lastde, lastde_pp, likelihood, detectlrr, fast_detectgpt]
+  E_robustness:
+    datasets: [xsum, writingprompts]
+    sub_experiments: [sample_count, paraphrase, decoding, length, proxy]
+  E_ablation:
+    datasets: [xsum, writingprompts]
+    variants: [ll_only, de_only, ll_plus_de]
+    aggregations: [std, 2norm, range, mean, sum]
+  E_hyperparameters:
+    datasets: [xsum]
+    s: [2, 3, 4, 5, 6]
+    eps_factor: [1, 4, 6, 8, 10]
+    tau_prime: [5, 10, 15, 20, 25]
+
+priorities:
+  - B_white_box_main
+  - C_black_box_main
+  - D_sampling_and_heavy_baselines
+  - E_cross_lingual
+  - E_robustness
+  - E_ablation
+  - E_hyperparameters

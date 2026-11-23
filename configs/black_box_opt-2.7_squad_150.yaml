@@ -1,0 +1,28 @@
+run_name: black_box_opt-2.7_squad_150
+seed: 0
+cache_dir: cache
+n_boot: 1000
+
+data:
+  - name: squad
+    path: data/pairs/squad/facebook__opt-2.7b.jsonl
+    limit: 150
+
+models:
+  - name: opt-2.7_black
+    source: facebook/opt-2.7b
+    proxy: /root/autodl-tmp/models/gpt-j-6B
+    white_box: false
+
+methods:
+  - lastde
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std

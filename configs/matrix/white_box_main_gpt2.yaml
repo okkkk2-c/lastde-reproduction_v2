@@ -1,0 +1,24 @@
+run_name: white_box_main_gpt2
+seed: 0
+cache_dir: cache
+n_boot: 1000
+data:
+- name: xsum
+  path: data/pairs/xsum/gpt2.jsonl
+  limit: 20
+models:
+- name: gpt2_white
+  source: gpt2
+  proxy: gpt2
+  white_box: true
+methods:
+- lastde
+- likelihood
+- logrank
+- entropy
+- detectlrr
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std

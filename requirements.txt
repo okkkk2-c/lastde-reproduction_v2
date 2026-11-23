@@ -1,0 +1,12 @@
+torch>=2.4
+transformers>=4.45
+datasets>=3.0
+huggingface_hub>=0.24
+numpy>=1.26
+pandas>=2.0
+PyYAML>=6.0
+tqdm>=4.66
+sentencepiece>=0.2
+accelerate>=0.34
+# optional, for 4-bit fallback on 24 GB cards
+# bitsandbytes>=0.43

@@ -1,0 +1,6 @@
+setting,method,auroc,n_pairs
+xsum_gpt4turbo_paraphrase,lastde,0.6614666666666666,150
+xsum_gpt4turbo_paraphrase,likelihood,0.5237333333333334,150
+xsum_gpt4turbo_paraphrase,logrank,0.5409777777777778,150
+xsum_gpt4turbo_paraphrase,entropy,0.3545333333333333,150
+xsum_gpt4turbo_paraphrase,detectlrr,0.5868444444444444,150

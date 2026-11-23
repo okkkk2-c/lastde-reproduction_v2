@@ -1,0 +1,28 @@
+run_name: black_box_gpt2_wp_150
+seed: 0
+cache_dir: cache
+n_boot: 1000
+
+data:
+  - name: writingprompts
+    path: data/pairs/writingprompts/gpt2.jsonl
+    limit: 150
+
+models:
+  - name: gpt2_black
+    source: gpt2
+    proxy: /root/autodl-tmp/models/gpt-j-6B
+    white_box: false
+
+methods:
+  - lastde
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std

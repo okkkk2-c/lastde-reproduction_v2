@@ -1,0 +1,31 @@
+run_name: white_box_mGPT_wmt16_150
+seed: 0
+cache_dir: cache
+n_boot: 1000
+
+data:
+  - name: wmt16_de
+    path: data/pairs/wmt16_de/root__autodl-tmp__models__mGPT.jsonl
+    limit: 150
+  - name: wmt16_en
+    path: data/pairs/wmt16_en/root__autodl-tmp__models__mGPT.jsonl
+    limit: 150
+
+models:
+  - name: mGPT_white
+    source: /root/autodl-tmp/models/mGPT
+    proxy: /root/autodl-tmp/models/mGPT
+    white_box: true
+
+methods:
+  - lastde
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std

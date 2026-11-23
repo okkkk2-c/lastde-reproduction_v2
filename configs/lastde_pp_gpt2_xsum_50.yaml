@@ -1,0 +1,38 @@
+run_name: lastde_pp_gpt2_xsum_20_prompt
+seed: 0
+cache_dir: cache
+n_boot: 0
+
+data:
+  - name: xsum
+    path: data/pairs/xsum/gpt2.jsonl
+    limit: 20
+
+models:
+  - name: gpt2_white
+    source: gpt2
+    proxy: gpt2
+    white_box: true
+
+methods:
+  - lastde
+  - lastde_pp
+  - fast_detectgpt
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std
+
+lastde_pp:
+  s: 4
+  eps_factor: 8
+  tau_prime: 15
+  n_samples: 100
+
+fast_detectgpt:
+  n_samples: 100
+  max_new_tokens: 200
+  temperature: 1.0
+  top_p: 0.95

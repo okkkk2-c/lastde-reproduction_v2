@@ -1,0 +1,30 @@
+# Fast first pass on the real XSum 150 pairs.
+# No sampling methods -> finishes in ~1-2 min on a GPU, no empty-sample crash.
+run_name: xsum_gpt2_150_fast
+seed: 0
+cache_dir: cache
+n_boot: 1000
+
+data:
+  - name: xsum
+    path: data/pairs/xsum/gpt2.jsonl
+    limit: 150
+
+models:
+  - name: gpt2_white
+    source: gpt2
+    proxy: gpt2
+    white_box: true
+
+methods:
+  - lastde
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std

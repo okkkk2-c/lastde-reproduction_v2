@@ -1,0 +1,44 @@
+# Plumbing-only run: no downloads, no torch.  Verifies the whole loop.
+run_name: smoke
+seed: 0
+cache_dir: cache
+n_boot: 200
+
+data:
+  - name: tiny
+    path: data/tiny_pairs.jsonl
+
+models:
+  - name: dummy
+    source: dummy
+    proxy: dummy
+    white_box: true
+
+methods:
+  - lastde
+  - lastde_pp
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+  - fast_detectgpt
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std
+
+lastde_pp:
+  s: 4
+  eps_factor: 8
+  tau_prime: 15
+  agg: std
+  n_samples: 8
+  max_new_tokens: 48
+  temperature: 1.0
+  top_p: 0.95
+
+fast_detectgpt:
+  n_samples: 8
+  max_new_tokens: 48

@@ -1,0 +1,102 @@
+# Lastde full reproduction: source model registry.
+# HF ids are pinned to the checkpoints used by the paper / Fast-DetectGPT where possible.
+# `gated: true` means the HF repo requires accepting a license and a HF token.
+
+main_open:  # 12 open-source models used for the main white-box table
+  - name: gpt2
+    hf_id: gpt2
+    params: 124M
+    fp16_gb: 0.5
+    gated: false
+  - name: neo-2.7
+    hf_id: EleutherAI/gpt-neo-2.7B
+    params: 2.7B
+    fp16_gb: 5.5
+    gated: false
+  - name: opt-2.7
+    hf_id: facebook/opt-2.7b
+    params: 2.7B
+    fp16_gb: 5.5
+    gated: false
+  - name: gpt-j
+    hf_id: EleutherAI/gpt-j-6B
+    params: 6B
+    fp16_gb: 12
+    gated: false
+  - name: llama-13
+    hf_id: huggyllama/llama-13b
+    params: 13B
+    fp16_gb: 26
+    gated: false
+    note: LLaMA-1 13B; some ports use decapoda-research/llama-13b-hf
+  - name: llama2-13
+    hf_id: meta-llama/Llama-2-13b-hf
+    params: 13B
+    fp16_gb: 26
+    gated: true
+  - name: llama3-8
+    hf_id: meta-llama/Meta-Llama-3-8B
+    params: 8B
+    fp16_gb: 16
+    gated: true
+  - name: opt-13
+    hf_id: facebook/opt-13b
+    params: 13B
+    fp16_gb: 26
+    gated: false
+  - name: bloom-7.1
+    hf_id: bigscience/bloom-7b1
+    params: 7.1B
+    fp16_gb: 14
+    gated: false
+  - name: falcon-7
+    hf_id: tiiuae/falcon-7b
+    params: 7B
+    fp16_gb: 14
+    gated: false
+  - name: gemma-7
+    hf_id: google/gemma-7b
+    params: 7B
+    fp16_gb: 16
+    gated: true
+  - name: phi-2
+    hf_id: microsoft/phi-2
+    params: 2.7B
+    fp16_gb: 5.5
+    gated: false
+
+cross_lingual:  # 3 open-source models reserved for WMT16 / Zhihu
+  - name: mgpt
+    hf_id: ai-forever/mGPT
+    params: 1.3B
+    fp16_gb: 5
+    gated: false
+    language: de/en
+  - name: qwen1.5-7b
+    hf_id: Qwen/Qwen1.5-7B
+    params: 7B
+    fp16_gb: 15
+    gated: false
+    language: zh
+  - name: yi-1.5-6b
+    hf_id: 01-ai/Yi-1.5-6B
+    params: 6B
+    fp16_gb: 12
+    gated: false
+    language: zh
+
+closed:  # 3 closed-source models, generation via API
+  - name: gpt-4-turbo
+    provider: openai
+    role: black-box main source
+  - name: gpt-4o
+    provider: openai
+    role: supplementary
+  - name: claude-3-haiku
+    provider: anthropic
+    role: supplementary
+
+proxy:
+  name: gpt-j
+  hf_id: EleutherAI/gpt-j-6B
+  note: sole proxy for all black-box methods unless explicitly stated

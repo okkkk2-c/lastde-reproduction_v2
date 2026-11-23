@@ -1,0 +1,4 @@
+dataset,model,method,auroc,ci_lo,ci_hi,n_pairs
+xsum,gpt2_white,fast_detectgpt,0.5856,,,50
+xsum,gpt2_white,lastde,0.972,,,50
+xsum,gpt2_white,lastde_pp,0.57,,,50

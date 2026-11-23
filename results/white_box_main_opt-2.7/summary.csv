@@ -1,0 +1,16 @@
+dataset,model,method,auroc,ci_lo,ci_hi,n_pairs
+squad,opt-2.7_white,detectlrr,0.9725,0.925,1.0,20
+squad,opt-2.7_white,entropy,0.55,0.37,0.7275,20
+squad,opt-2.7_white,lastde,0.9975,0.99,1.0,20
+squad,opt-2.7_white,likelihood,0.9075,0.8,0.985,20
+squad,opt-2.7_white,logrank,0.9425,0.8649375,0.995,20
+writingprompts,opt-2.7_white,detectlrr,0.97,0.9024375,1.0,20
+writingprompts,opt-2.7_white,entropy,0.505,0.3175,0.6875625,20
+writingprompts,opt-2.7_white,lastde,0.95,0.85,1.0,20
+writingprompts,opt-2.7_white,likelihood,0.9775,0.93,1.0,20
+writingprompts,opt-2.7_white,logrank,0.9925,0.97,1.0,20
+xsum,opt-2.7_white,detectlrr,0.7775,0.6224375000000001,0.91,20
+xsum,opt-2.7_white,entropy,0.2125,0.085,0.36006249999999995,20
+xsum,opt-2.7_white,lastde,0.995,0.975,1.0,20
+xsum,opt-2.7_white,likelihood,0.7425,0.575,0.8875,20
+xsum,opt-2.7_white,logrank,0.7875,0.6199375,0.9200625,20

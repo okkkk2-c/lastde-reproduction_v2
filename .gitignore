@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+data/
+models/
+cache/
+.cache/
+*.bin
+*.safetensors
+*.pt
+*.pth
+*.zip
+.env
+*.key
+results/**/scores.jsonl
+Lastde_evidence.png

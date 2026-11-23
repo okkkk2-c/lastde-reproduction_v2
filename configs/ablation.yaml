@@ -1,0 +1,27 @@
+# Ablation: global LL only vs local Agg-MDE only vs both (Lastde).
+run_name: ablation
+seed: 0
+cache_dir: cache
+n_boot: 1000
+
+data:
+  - name: xsum
+    path: data/xsum_pairs.jsonl
+    limit: 150
+
+models:
+  - name: gpt2_black
+    source: gpt2
+    proxy: EleutherAI/gpt-j-6B
+    white_box: false
+
+methods:
+  - ll_only
+  - mde_only
+  - lastde
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std

@@ -1,0 +1,46 @@
+# Full comparison on XSum 150 pairs, but with 20 samples (not 100) for speed.
+# Includes Lastde++ and Fast-DetectGPT-style sampling.
+run_name: xsum_gpt2_150_full
+seed: 0
+cache_dir: cache
+n_boot: 1000
+
+data:
+  - name: xsum
+    path: data/pairs/xsum/gpt2.jsonl
+    limit: 150
+
+models:
+  - name: gpt2_white
+    source: gpt2
+    proxy: gpt2
+    white_box: true
+
+methods:
+  - lastde
+  - lastde_pp
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+  - fast_detectgpt
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std
+
+lastde_pp:
+  s: 4
+  eps_factor: 8
+  tau_prime: 15
+  agg: std
+  n_samples: 20
+  max_new_tokens: 200
+  temperature: 1.0
+  top_p: 0.95
+
+fast_detectgpt:
+  n_samples: 20
+  max_new_tokens: 200

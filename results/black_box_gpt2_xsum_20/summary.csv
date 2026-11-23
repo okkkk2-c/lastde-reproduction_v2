@@ -1,0 +1,6 @@
+dataset,model,method,auroc,ci_lo,ci_hi,n_pairs
+xsum,gpt2_black,detectlrr,0.365,0.212375,0.5351875,20
+xsum,gpt2_black,entropy,0.02,0.0,0.075,20
+xsum,gpt2_black,lastde,0.905,0.8023125,0.9850625,20
+xsum,gpt2_black,likelihood,0.05,0.0,0.13256250000000003,20
+xsum,gpt2_black,logrank,0.0925,0.0174375,0.18262500000000004,20

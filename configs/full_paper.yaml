@@ -1,0 +1,84 @@
+# Template for the paper-style run.  Prepare the six JSONL files first
+# (scripts/prepare_pairs.py), then extend `models:` with the 18 source models.
+run_name: full_paper
+seed: 0
+cache_dir: cache
+n_boot: 1000
+
+data:
+  - name: xsum
+    path: data/xsum_pairs.jsonl
+    limit: 150
+  - name: squad
+    path: data/squad_pairs.jsonl
+    limit: 150
+  - name: writingprompts
+    path: data/writingprompts_pairs.jsonl
+    limit: 150
+  - name: reddit
+    path: data/reddit_pairs.jsonl
+    limit: 150
+  - name: wmt16_de
+    path: data/wmt16_de_pairs.jsonl
+    limit: 150
+  - name: zhihu
+    path: data/zhihu_pairs.jsonl
+    limit: 150
+
+models:
+  # white-box: source == proxy
+  - name: gpt2_white
+    source: gpt2
+    proxy: gpt2
+    white_box: true
+  - name: opt2p7_white
+    source: facebook/opt-2.7b
+    proxy: facebook/opt-2.7b
+    white_box: true
+  - name: llama3_8_white
+    source: meta-llama/Meta-Llama-3-8B
+    proxy: meta-llama/Meta-Llama-3-8B
+    white_box: true
+
+  # black-box: a fixed proxy for everything (paper default: GPT-J)
+  - name: gpt2_black
+    source: gpt2
+    proxy: EleutherAI/gpt-j-6B
+    white_box: false
+  - name: opt2p7_black
+    source: facebook/opt-2.7b
+    proxy: EleutherAI/gpt-j-6B
+    white_box: false
+  - name: llama3_8_black
+    source: meta-llama/Meta-Llama-3-8B
+    proxy: EleutherAI/gpt-j-6B
+    white_box: false
+
+methods:
+  - lastde
+  - lastde_pp
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+  - fast_detectgpt
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std
+
+lastde_pp:
+  s: 4
+  eps_factor: 8
+  tau_prime: 15
+  agg: std
+  n_samples: 100
+  max_new_tokens: 200
+  temperature: 1.0
+  top_p: 0.95
+
+fast_detectgpt:
+  n_samples: 100
+  max_new_tokens: 200

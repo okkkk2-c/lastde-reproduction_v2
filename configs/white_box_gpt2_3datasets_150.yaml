@@ -1,0 +1,34 @@
+run_name: white_box_gpt2_3datasets_150
+seed: 0
+cache_dir: cache
+n_boot: 1000
+
+data:
+  - name: xsum
+    path: data/pairs/xsum/gpt2.jsonl
+    limit: 150
+  - name: squad
+    path: data/pairs/squad/gpt2.jsonl
+    limit: 150
+  - name: writingprompts
+    path: data/pairs/writingprompts/gpt2.jsonl
+    limit: 150
+
+models:
+  - name: gpt2_white
+    source: gpt2
+    proxy: gpt2
+    white_box: true
+
+methods:
+  - lastde
+  - likelihood
+  - logrank
+  - entropy
+  - detectlrr
+
+lastde:
+  s: 3
+  eps_factor: 10
+  tau_prime: 5
+  agg: std
